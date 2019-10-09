@@ -51,7 +51,7 @@ contract Locacao
     {
         require(mesesRestantes<30, "Periodo de contrato inválido");
         for (uint256 i=1; i<mesesRestantes; i++) {
-        valor = valor+((valor*percentual)/100);
+            valor = valor+((valor*percentual)/100);
         }
     }
-}   
+}  
