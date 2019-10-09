@@ -2,12 +2,7 @@ pragma solidity 0.5.12;
 
 contract Locacao 
 {
-    
-    /*
-    para textao 
-    */
-    // para texto menor
-    //
+ 
     string public locador;
     string public locatario;    
     uint256 private valor;
@@ -38,8 +33,25 @@ contract Locacao
     
     function reajusteAlugel (uint256 percentualReajuste) public 
     {
+        if (percentualReajuste > 20)
+        {
+            percentualReajuste = 20;
+        }
         uint256 valorDoAcrescimo = 0;
         valorDoAcrescimo = ((valor*percentualReajuste)/100);
         valor = valor + valorDoAcrescimo;
     }
-}  
+    
+    function aditamentoValorAluguel (uint256 valorCerto) public
+    {
+        valor = valorCerto;
+    }
+    
+    function aplicaMulta(uint256 mesesRestantes, uint256 percentual)    public
+    {
+        require(mesesRestantes<30, "Periodo de contrato inválido");
+        for (uint256 i=1; i<mesesRestantes; i++) {
+        valor = valor+((valor*percentual)/100);
+        }
+    }
+}   
