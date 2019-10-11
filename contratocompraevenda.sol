@@ -1,17 +1,18 @@
-pragma solidity 0.5.10;
+pragma solidity 0.5.12;
 
-contract compraevenda {
+contract Compraevenda {
     
     string public vendedor;
     string public comprador;
     uint256 private valor;
     uint256 private prazopagamento;
+    uint256 private tabelaFIPE;
     
     constructor (
         string memory nomeVendedor,
         string memory nomeComprador,
         uint256 valorCarro,
-        uint256 prazopagamento)
+        uint256 mesesParcela)
     
     public
     {
@@ -19,21 +20,22 @@ contract compraevenda {
         comprador = nomeComprador;
         valor = valorCarro;
         prazopagamento = mesesParcela;
-        
+        tabelaFIPE = tabelaFIPE;
+       
+        if (tabelaFIPE > valorCarro)
+        {
+            valorCarro = tabelaFIPE; 
+        }
+    
     }
     
-    if (tabelaFIPE > valorCarro)
+    function vencimentoAntecipado (uint256 mesesParcela, uint256 valorCarro)  public
     {
-       valorCarro = tabelaFIPE 
-    }
-    
-    function aplicaMulta (uint256 mesesParcela, uint256 valorCarro)  public
-    {
-        // inadimplemento de aparcelas até o sexto mês
+        // inadimplemento de parcelas até o sexto mês
         
-        require (uint256 mesesParcela < 6,  "inadimplemento");
+        require (mesesParcela < 6,  "se atrasar parcela em < 6 mesesParcela = vencimentoAntecipado");
         for (uint256 i=6; i<mesesParcela; i++) {
-            valor = valorCarro
+            valor = valorCarro;
         }
     }
 }
