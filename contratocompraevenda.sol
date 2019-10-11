@@ -4,7 +4,8 @@ contract Compraevenda {
     
     string public vendedor;
     string public comprador;
-    uint256 private valor;
+    uint256 private valorParcela;
+    uint256 private valorPresente;
     uint256 private prazopagamento;
     uint256 private tabelaFIPE;
     
@@ -18,7 +19,7 @@ contract Compraevenda {
     {
         vendedor = nomeVendedor;
         comprador = nomeComprador;
-        valor = valorCarro;
+        valorParcela = valorCarro/mesesParcela;
         prazopagamento = mesesParcela;
         tabelaFIPE = tabelaFIPE;
        
@@ -30,12 +31,13 @@ contract Compraevenda {
     }
     
     function vencimentoAntecipado (uint256 mesesParcela, uint256 valorCarro)  public
+    
     {
         // inadimplemento de parcelas até o sexto mês
         
         require (mesesParcela < 6,  "se atrasar parcela em < 6 mesesParcela = vencimentoAntecipado");
-        for (uint256 i=6; i<mesesParcela; i++) {
-            valor = valorCarro;
+        for (uint256 i=1; i<mesesParcela; i++) {
+            valorPresente = valorPresente + valorParcela;
         }
     }
 }
